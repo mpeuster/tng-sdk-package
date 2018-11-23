@@ -37,7 +37,7 @@ from tngsdk.package.logger import TangoLogger
 
 
 # need to use __file__ in __init__.py to avoid dupl. logs
-LOG = TangoLogger.getLogger(os.path.basename(__file__))
+LOG = TangoLogger.getLogger(__name__)
 
 
 def setup_logging(args):

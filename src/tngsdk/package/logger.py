@@ -110,6 +110,7 @@ class TangoLogger(object):
         # all TangoLoggers are prefixed for global setup
         logger = logging.getLogger("tango.{}".format(name))
         coloredlogs.install(logger=logger)
+        logger.propagate = False
         th = TangoJsonLogHandler()
         logger.addHandler(th)
         # configure logger
