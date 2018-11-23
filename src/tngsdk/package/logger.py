@@ -35,6 +35,9 @@ import datetime
 import json
 
 
+LOGGER_PREFIX = "tngpkg."
+
+
 class TangoLogger(object):
     """
     5GTAGNO logger that allows to switch to "JSON mode" to creat
@@ -79,7 +82,7 @@ class TangoLogger(object):
         # reconfigure all our TangoLoggers
         for n, l in logging.Logger.manager.loggerDict.items():
             # use prefix to only get TangoLoggers
-            if n.startswith("tango.") and isinstance(l, logging.Logger):
+            if n.startswith(LOGGER_PREFIX) and isinstance(l, logging.Logger):
                 TangoLogger._reconfigure_logger(l, log_level, log_json)
 
     @staticmethod
@@ -108,7 +111,7 @@ class TangoLogger(object):
         Create a TangoLogger logger.
         """
         # all TangoLoggers are prefixed for global setup
-        logger = logging.getLogger("tango.{}".format(name))
+        logger = logging.getLogger("{}{}".format(LOGGER_PREFIX, name))
         coloredlogs.install(logger=logger)
         logger.propagate = False
         th = TangoJsonLogHandler()
